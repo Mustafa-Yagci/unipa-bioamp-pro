@@ -5,13 +5,13 @@
 ![Header Banner](https://capsule-render.vercel.app/api?type=waving&color=gradient&customColorList=2,12,30,48&height=200&section=header&text=UniPa%20BioAmp%20Pro&fontSize=48&fontColor=ffffff&animation=fadeIn&subtext=Precision%20Biopotential%20AFE%20%7C%20CMRR%20%3E100%20dB%20%E2%80%A2%20DRL%20Active%20Suppression%20%E2%80%A2%20KiCad%208&subfontSize=17&subfontColor=d8ecf8)
 
 [![KiCad 8.0](https://img.shields.io/badge/EDA-KiCad_8.0-314CB0?style=for-the-badge&logo=kicad&logoColor=white)](https://kicad.org)
-[![CMRR](https://img.shields.io/badge/CMRR-%3E100_dB_@_50Hz-darkgreen?style=for-the-badge)](https://github.com/yotova/unipa-bioamp-pro)
-[![DRL](https://img.shields.io/badge/DRL-Active_Common--Mode_Drive-blue?style=for-the-badge)](https://github.com/yotova/unipa-bioamp-pro)
-[![Fabrication](https://img.shields.io/badge/Gerbers-RS--274X_Verified-008080?style=for-the-badge)](https://github.com/yotova/unipa-bioamp-pro/tree/main/gerbers)
+[![CMRR](https://img.shields.io/badge/CMRR-%3E100_dB_@_50Hz-darkgreen?style=for-the-badge)](https://github.com/Mustafa-Yagci/unipa-bioamp-pro)
+[![DRL](https://img.shields.io/badge/DRL-Active_Common--Mode_Drive-blue?style=for-the-badge)](https://github.com/Mustafa-Yagci/unipa-bioamp-pro)
+[![Fabrication](https://img.shields.io/badge/Gerbers-RS--274X_Verified-008080?style=for-the-badge)](https://github.com/Mustafa-Yagci/unipa-bioamp-pro/tree/main/gerbers)
 [![License](https://img.shields.io/badge/License-MIT-yellow?style=for-the-badge)](LICENSE)
 
 <p align="center">
-  <b>Engineered by Mustafa Yağcı (<a href="https://github.com/yotova">@yotova</a>)</b><br/>
+  <b>Engineered by Mustafa Yağcı (<a href="https://github.com/Mustafa-Yagci">@Mustafa-Yagci</a>)</b><br/>
   <i>M.Sc. Electronic Engineering — Università degli Studi di Palermo (UniPa)</i>
 </p>
 
@@ -69,7 +69,8 @@ Compared to conventional single-ended educational boards, **UniPa BioAmp Pro** i
 
 ### 1. High-CMRR Instrumentation Stage
 The frontend employs a three-op-amp instrumentation amplifier topology:
-$$V_{out1} = \left( 1 + rac{2 R_1}{R_G} ight) (V_{IN+} - V_{IN-})$$
+$$V_{out1} = \left( 1 + rac{2 R_1}{R_G} 
+ight) (V_{IN+} - V_{IN-})$$
 By keeping first-stage gain modest ($A_{v1} pprox 10$), the circuit preserves large common-mode headroom without saturating the rails under large DC half-cell electrode potentials ($\pm 300\,	ext{mV}$).
 
 ### 2. Driven Right Leg (DRL) Active Feedback
@@ -127,7 +128,7 @@ unipa-bioamp-pro/
 The manufacturing files in `gerbers/` are 100% production-ready:
 1. Download or clone this repository:
    ```bash
-   git clone https://github.com/yotova/unipa-bioamp-pro.git
+   git clone https://github.com/Mustafa-Yagci/unipa-bioamp-pro.git
    ```
 2. Compress the contents of the `gerbers/` folder into `UniPa_BioAmp_Pro_Gerber.zip`.
 3. Upload to your preferred PCB fabricator (**JLCPCB**, **PCBWay**, **OSH Park**).
@@ -160,6 +161,6 @@ This project is licensed under the **MIT License** — see the [LICENSE](LICENSE
 
 ## 📬 Contact & Inquiries
 
-- **Author:** Mustafa Yağcı ([@yotova](https://github.com/yotova))
+- **Author:** Mustafa Yağcı ([@Mustafa-Yagci](https://github.com/Mustafa-Yagci))
 - **Email:** [mrmustafayagci@gmail.com](mailto:mrmustafayagci@gmail.com)
 - **Institution:** Università degli Studi di Palermo (UniPa), Palermo, Italy
