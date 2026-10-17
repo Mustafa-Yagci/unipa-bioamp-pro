@@ -85,7 +85,7 @@ The repository includes complete, first-principles academic documentation and en
 > [!TIP]
 > **Complete Production Deliverables:**
 > - Master Vector Schematic: [`docs/UniPa_BioAmp_Pro_Schematic.pdf`](docs/UniPa_BioAmp_Pro_Schematic.pdf)
-> - 4-Layer PCB Production Drawing: [`docs/UniPa_BioAmp_Pro_PCB.pdf`](docs/UniPa_BioAmp_Pro_PCB.pdf)
+> - 2-Layer PCB Production Drawing: [`docs/UniPa_BioAmp_Pro_PCB.pdf`](docs/UniPa_BioAmp_Pro_PCB.pdf)
 > - Manufacturing Package (RS-274X Gerbers & Drill): [`gerbers/`](gerbers/)
 
 ---
@@ -101,12 +101,46 @@ Complete multi-stage analog processing architecture with differential input filt
 
 <br/>
 
-### 📟 Precision 4-Layer PCB Layout
-Engineered in KiCad 8 with dedicated ground planes, input trace guarding rings to suppress surface leakage currents, and isolated power rails:
+### 📟 Physical PCB Architecture & Copper Layer Stackup
+
+Engineered in KiCad 8 with a continuous low-impedance ground return plane on the bottom layer and active guard shielding on the top layer:
+
+<table>
+  <tr>
+    <td width="50%" align="center" valign="top">
+      <h4>🟢 Top Layer (F.Cu) — Signal Routing & Active Guard Rings</h4>
+      <a href="assets/UniPa_BioAmp_Pro_PCB_top_cu.png">
+        <img src="assets/UniPa_BioAmp_Pro_PCB_top_cu.png" width="100%" alt="Top Copper Layer (F.Cu)" style="border: 1px solid #30363d; border-radius: 6px;" />
+      </a>
+      <p align="left"><b>Sinyal ve Koruma Katmanı:</b> INA128 yüksek empedans giriş hatlarını çevreleyen aktif Guard Ring koruma halkaları, 19 net diferansiyel sinyal yolları, SMD komponent pad'leri ve RF bastırma hatları.</p>
+    </td>
+    <td width="50%" align="center" valign="top">
+      <h4>🔵 Bottom Layer (B.Cu) — Continuous Solid Ground Plane</h4>
+      <a href="assets/UniPa_BioAmp_Pro_PCB_bottom_cu.png">
+        <img src="assets/UniPa_BioAmp_Pro_PCB_bottom_cu.png" width="100%" alt="Bottom Copper Layer (B.Cu)" style="border: 1px solid #30363d; border-radius: 6px;" />
+      </a>
+      <p align="left"><b>Katı Toprak Düzlemi (GND Plane):</b> Kesintisiz, deliksiz solid bakır döküm (copper pour). Geri dönüş akım yollarını optimize eder ve harici 50/60 Hz şebeke kaçak akımlarına karşı zırh (shield) görevi görür.</p>
+    </td>
+  </tr>
+</table>
 
 <div align="center">
-  <img src="assets/UniPa_BioAmp_Pro_PCB.svg" width="85%" alt="UniPa BioAmp Pro 4-Layer PCB Layout" />
+  <h4>🔬 Composite Full Assembly View (F.Cu + B.Cu + SilkS + Edge.Cuts)</h4>
+  <img src="assets/UniPa_BioAmp_Pro_PCB.svg" width="85%" alt="UniPa BioAmp Pro Composite PCB Layout" />
 </div>
+
+#### 📐 Layer Stackup & Implementation Details
+
+| Layer # | Layer Name | Copper Thickness | Function & Physical Implementation |
+| :--- | :--- | :--- | :--- |
+| **Layer 1** | **F.Cu (Top Copper)** | 35 µm (1 oz) | Microvolt differential biosignal routing, RF input filtering, component footprints, and active guard traces protecting INA128 inputs. |
+| **Core** | **FR-4 Dielectric** | 1.5 mm | Standard high-isolation FR-4 fiberglass core substrate ($\varepsilon_r \approx 4.5$, $\tan\delta \approx 0.02$). |
+| **Layer 2** | **B.Cu (Bottom Copper)** | 35 µm (1 oz) | 100% solid unbroken copper ground pour plane (`GND`). Provides zero-loop return current path and EMI shielding. |
+
+> [!NOTE]
+> **Katman Mimarisi Açıklaması (2-Katman Gerçekleştirim & 4-Katman Endüstriyel Referans):**
+> * **Üretilen Fiziksel Donanım (KiCad):** Prototipleme maliyetini optimize etmek, devre üretim süresini kısaltmak ve montaj verimini maksimize etmek amacıyla kart, **2-Katmanlı (F.Cu + B.Cu)** olarak yönlendirilmiştir. Alt katman (B.Cu) tamamen katı bir toprak kalkanı (Solid Ground Plane) olarak doldurulmuş, üst katman (F.Cu) ise sinyal yolları ve guard ring koruma halkaları ile donatılmıştır. Gerbers klasöründeki üretim paketinde yer alan `UniPa_BioAmp_Pro-F_Cu.gtl` (Top) ve `UniPa_BioAmp_Pro-B_Cu.gbl` (Bottom) bu iki katmandan oluşur.
+> * **4-Katmanlı Endüstriyel Referans Modeli:** Dokümantasyon ve tasarım rehberinde (`docs/`) açıklanan 4-katmanlı model; katman 2'yi izole iç toprak düzlemi (In1.Cu / GND), katman 3'ü ise izole besleme rayları (In2.Cu / VDD-VSS) olarak ayırmak isteyen medikal sertifikasyonlar (IEC 60601) için teorik bir referans stackup'tır. Mevcut 2-katmanlı tasarım 0 DRC hatasıyla >100 dB CMRR sunmaktadır.
 
 ---
 
@@ -260,11 +294,12 @@ unipa-bioamp-pro/
 │   ├── UniPa_BioAmp_Pro_Komponent_Secimi_ve_Hesaplamalari.pdf   # 9-Page Mathematical Sizing
 │   ├── UniPa_BioAmp_Pro_vs_BioAmp_EXG_Pill_Karsilastirma_Raporu.pdf # 6-Page Benchmark Report
 │   ├── UniPa_BioAmp_Pro_Schematic.pdf       # Master Schematic PDF print
-│   └── UniPa_BioAmp_Pro_PCB.pdf             # 4-Layer PCB Production Drawing
+│   └── UniPa_BioAmp_Pro_PCB.pdf             # 2-Layer PCB Production Drawing
 ├── assets/                                  # High-Res Visualizations & Schematics
 │   ├── UniPa_BioAmp_Pro_Schematic.png       # 300 DPI Master Schematic Image
-│   ├── UniPa_BioAmp_Pro_PCB.svg             # 4-Layer Vector PCB Drawing
-│   ├── UniPa_BioAmp_Pro_PCB.png             # Rendered PCB Graphic
+│   ├── UniPa_BioAmp_Pro_PCB_top_cu.png      # Top Copper (F.Cu) Signal & Active Guard Rings
+│   ├── UniPa_BioAmp_Pro_PCB_bottom_cu.png   # Bottom Copper (B.Cu) Solid Ground Plane
+│   ├── UniPa_BioAmp_Pro_PCB.svg             # Composite Vector PCB Drawing
 │   ├── UniPa_BioAmp_Pro_Guide_Cover.png     # Engineering Guide Cover Preview
 │   └── UniPa_BioAmp_Pro_Calculations_Cover.png # Calculation Guide Cover Preview
 ├── hardware/                                # Complete KiCad 8 Project Suite
@@ -301,7 +336,7 @@ The manufacturing files in `gerbers/` are 100% production-ready (0 ERC / 0 DRC e
 2. Compress the contents of the `gerbers/` directory into a single zip archive (`UniPa_BioAmp_Pro_Gerber.zip`).
 3. Upload to your preferred PCB fabricator (**JLCPCB**, **PCBWay**, **OSH Park**).
 4. Recommended PCB specifications:
-   - **Layer Count:** 4 Layers (Layer 2: Ground Plane, Layer 3: Power Rails)
+   - **Layer Count:** 2 Layers (Top: Signal & Active Guard Rings, Bottom: Solid Ground Plane) — or 4 Layers if upgrading to dedicated inner power planes.
    - **PCB Thickness:** 1.6 mm
    - **Copper Weight:** 1 oz (35 µm)
    - **Surface Finish:** ENIG (Electroless Nickel Immersion Gold) recommended for biopotential signal integrity.
