@@ -112,14 +112,14 @@ Engineered in KiCad 8 with a continuous low-impedance ground return plane on the
       <a href="assets/UniPa_BioAmp_Pro_PCB_top_cu.png">
         <img src="assets/UniPa_BioAmp_Pro_PCB_top_cu.png" width="100%" alt="Top Copper Layer (F.Cu)" style="border: 1px solid #30363d; border-radius: 6px;" />
       </a>
-      <p align="left"><b>Sinyal ve Koruma Katmanı:</b> INA128 yüksek empedans giriş hatlarını çevreleyen aktif Guard Ring koruma halkaları, 19 net diferansiyel sinyal yolları, SMD komponent pad'leri ve RF bastırma hatları.</p>
+      <p align="left"><b>Signal & Active Guard Ring Layer:</b> Dedicated active guard traces encircling high-impedance INA128 differential input nodes, 19 routed topological signal nets, SMD footprints, and high-frequency RF suppression networks.</p>
     </td>
     <td width="50%" align="center" valign="top">
       <h4>🔵 Bottom Layer (B.Cu) — Continuous Solid Ground Plane</h4>
       <a href="assets/UniPa_BioAmp_Pro_PCB_bottom_cu.png">
         <img src="assets/UniPa_BioAmp_Pro_PCB_bottom_cu.png" width="100%" alt="Bottom Copper Layer (B.Cu)" style="border: 1px solid #30363d; border-radius: 6px;" />
       </a>
-      <p align="left"><b>Katı Toprak Düzlemi (GND Plane):</b> Kesintisiz, deliksiz solid bakır döküm (copper pour). Geri dönüş akım yollarını optimize eder ve harici 50/60 Hz şebeke kaçak akımlarına karşı zırh (shield) görevi görür.</p>
+      <p align="left"><b>Solid Ground Return Plane (GND):</b> Unbroken, solid copper pour plane (`GND`). Minimizes return current loop areas and shields sensitive analog front-end circuitry against 50/60 Hz mains displacement noise and radiated EMI.</p>
     </td>
   </tr>
 </table>
@@ -138,9 +138,9 @@ Engineered in KiCad 8 with a continuous low-impedance ground return plane on the
 | **Layer 2** | **B.Cu (Bottom Copper)** | 35 µm (1 oz) | 100% solid unbroken copper ground pour plane (`GND`). Provides zero-loop return current path and EMI shielding. |
 
 > [!NOTE]
-> **Katman Mimarisi Açıklaması (2-Katman Gerçekleştirim & 4-Katman Endüstriyel Referans):**
-> * **Üretilen Fiziksel Donanım (KiCad):** Prototipleme maliyetini optimize etmek, devre üretim süresini kısaltmak ve montaj verimini maksimize etmek amacıyla kart, **2-Katmanlı (F.Cu + B.Cu)** olarak yönlendirilmiştir. Alt katman (B.Cu) tamamen katı bir toprak kalkanı (Solid Ground Plane) olarak doldurulmuş, üst katman (F.Cu) ise sinyal yolları ve guard ring koruma halkaları ile donatılmıştır. Gerbers klasöründeki üretim paketinde yer alan `UniPa_BioAmp_Pro-F_Cu.gtl` (Top) ve `UniPa_BioAmp_Pro-B_Cu.gbl` (Bottom) bu iki katmandan oluşur.
-> * **4-Katmanlı Endüstriyel Referans Modeli:** Dokümantasyon ve tasarım rehberinde (`docs/`) açıklanan 4-katmanlı model; katman 2'yi izole iç toprak düzlemi (In1.Cu / GND), katman 3'ü ise izole besleme rayları (In2.Cu / VDD-VSS) olarak ayırmak isteyen medikal sertifikasyonlar (IEC 60601) için teorik bir referans stackup'tır. Mevcut 2-katmanlı tasarım 0 DRC hatasıyla >100 dB CMRR sunmaktadır.
+> **Stackup Architecture (Fabricated 2-Layer Board vs 4-Layer Industrial Reference):**
+> * **Fabricated Physical Hardware (KiCad):** To optimize prototyping turnaround, maintain high fabrication yield, and minimize parasitic capacitances, the physical hardware is designed and routed as an ultra-low-noise **2-Layer PCB (F.Cu + B.Cu)**. The entire bottom layer (B.Cu) is dedicated to a continuous, unbroken solid ground pour (Solid Ground Plane), while the top layer (F.Cu) routes all critical differential biosignals and active guard rings. The manufacturing package in `gerbers/` (`UniPa_BioAmp_Pro-F_Cu.gtl` and `UniPa_BioAmp_Pro-B_Cu.gbl`) reflects this physical 2-layer implementation.
+> * **4-Layer Industrial Reference Model:** The 4-layer stackup presented in the design guide (`docs/`) is an optional reference model for commercial medical-device certification (IEC 60601-1 Type BF/CF), which isolates internal ground (Layer 2) from internal supply planes (Layer 3). The fabricated 2-layer implementation delivers full laboratory-grade performance with >100 dB CMRR and 0 DRC errors.
 
 ---
 
