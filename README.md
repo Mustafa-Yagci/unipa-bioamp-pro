@@ -357,18 +357,13 @@ The manufacturing files in `gerbers/` are 100% production-ready (0 ERC / 0 DRC e
 
 ---
 
-## 📐 Biomedical Instrumentation & PCB Design Standards
+## 📐 Medical Safety Standards Compliance
 
-**UniPa BioAmp Pro** incorporates rigorous adherence to medical equipment safety, diagnostic performance, and electronic manufacturing standards:
+**UniPa BioAmp Pro** incorporates medical electrical safety compliance as documented in the engineering design guides:
 
-| Standard Code | Standard Title & Organization | Practical Engineering Implementation in BioAmp Pro |
-| :--- | :--- | :--- |
-| **IEC 60601-1** | *Medical Electrical Equipment — Part 1: General Requirements for Basic Safety and Essential Performance* | Enforces strict patient auxiliary leakage current limits ($< 10\,\mu\text{A}$ in normal condition). Implemented via a $100\text{ k}\Omega$ safety current-limiting series resistor in the DRL active feedback output path, protecting the subject under any single-fault amplifier failure condition. |
-| **IEC 60601-2-47 / IEC 60601-2-27** | *Particular Requirements for the Basic Safety and Essential Performance of Electrocardiographic Monitoring Equipment* | Directs dynamic baseline drift immunity, differential dynamic range, electrode polarization recovery, and 50/60 Hz mains interference rejection. |
-| **ANSI/AAMI EC11 / EC13** | *Diagnostic Electrocardiographic Devices* | Standardizes diagnostic frequency passband ($0.5\text{ Hz} - 150\text{ Hz}$) implemented through 2nd-order Sallen-Key high-pass ($f_c = 0.48\text{ Hz}$) and low-pass ($f_c = 150\text{ Hz}$) active filter stages, and requires minimum CMRR $>89\text{ dB}$ (exceeded by BioAmp Pro at $>100\text{ dB}$). |
-| **IPC-2221B** | *Generic Standard on Printed Board Design* | Dictates conductor spacing, active guard ring trace geometry surrounding high-impedance inputs to eliminate surface PCB leakage currents, and clearance rules for dual-rail power nets. |
-| **IPC-7351B** | *Generic Requirements for Surface Mount Design and Land Pattern Standard* | Standardizes SMT land patterns, pad geometry tolerances, and thermal relief pads for reliable assembly of precision analog ICs (INA128, TL072, OPA2340). |
-| **IPC-A-610 Class 2/3** | *Acceptability of Electronic Assemblies* | Establishes manufacturing and inspection criteria for high-reliability medical/biomedical electronics assemblies. |
+| Standard Code | Standard Title & Organization | Practical Engineering Implementation in BioAmp Pro | Documentation Source |
+| :--- | :--- | :--- | :--- |
+| **IEC 60601-1** | *Medical Electrical Equipment — Part 1: General Requirements for Basic Safety and Essential Performance* | Enforces patient auxiliary leakage current limits ($< 10\,\mu\text{A}$ in normal condition, $< 50\,\mu\text{A}$ single fault condition). Implemented via a $100\text{ k}\Omega$ safety current-limiting resistor ($R_{\text{limit}}$) in the DRL active feedback output path, protecting the subject under any single-fault condition. | [Engineering Guide (p. 6)](docs/UniPa_BioAmp_Pro_Sifirdan_AFE_Muhendislik_Rehberi.pdf)<br>[Calculations Guide (p. 2-3)](docs/UniPa_BioAmp_Pro_Komponent_Secimi_ve_Hesaplamalari.pdf) |
 
 ---
 
